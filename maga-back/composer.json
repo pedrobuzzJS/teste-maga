@@ -2,9 +2,16 @@
     "require": {
         "doctrine/orm": "^3.0",
         "symfony/cache": "^6.4",
-        "doctrine/dbal": "^4.0"
+        "doctrine/dbal": "^4.0",
+        "slim/slim": "4.*",
+        "doctrine/migrations": "^3.7"
     },
     "autoload": {
-        "psr-0": {"": "src/"}
+        "psr-4": {
+            "Maga\\": "src/"
+        }
+    },
+    "require-dev": {
+        "spatie/ray": "^1.41"
     }
 }
