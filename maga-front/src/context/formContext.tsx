@@ -1,15 +1,12 @@
 "use client";
 
 import dot from "dot-object";
-import { delayAndRun } from "@/helpers/functions";
 import React, {
 	createContext,
 	PropsWithChildren,
-	useCallback,
 	useContext,
 	useState
 } from "react";
-import collect from "collect.js";
 interface inputField {
 	name: any;
 	ref?: any;
@@ -18,8 +15,8 @@ interface inputField {
 interface IFormProps {
 	id?: unknown;
 	formValues: {};
-	handleSubmit?: (callBack?: () => void) => void;
-	clearFormValue?: () => void;
+	handleSubmit: (callBack?: (args: unknown) => void) => void;
+	clearFormValue: () => void;
 	setFormFieldValue: ({ name, value }: inputField) => void;
 	watch: () => void;
 }
@@ -35,25 +32,18 @@ export const FormProvider: React.FC<FormWithChildren> = ({ children }) => {
 	let fields: any[] = [];
 
 	const setFormFieldValue = ({ name, value }: inputField) => {
-		delayAndRun(() => {
-			form = {
-				...form,
-				[name]: value
-			};
-		}, 1000);
+		form = {
+			...form,
+			[name]: value
+		};
 		if (!fields.includes(name)) fields.push(name);
 	};
 
-	const handleSubmit = async (callBack?: () => void) => {
-		const data = dot.object(form);
+	const handleSubmit = async (callBack: (data: unknown) => Promise<void>) => {
+		const data = await dot.object(form);
 		setFormValues(data);
-		console.log(data);
-		// if (callBack) callBack();
+		await callBack(form);
 		return true;
-	};
-
-	const watch = () => {
-		return null;
 	};
 
 	const clearFormValue = (callBack?: () => void) => {
@@ -70,8 +60,7 @@ export const FormProvider: React.FC<FormWithChildren> = ({ children }) => {
 				handleSubmit: handleSubmit,
 				formValues: formValues,
 				clearFormValue: clearFormValue,
-				setFormFieldValue: setFormFieldValue,
-				watch: watch
+				setFormFieldValue: setFormFieldValue
 			}}
 		>
 			{children}

@@ -13,6 +13,7 @@ interface IInputTextProps extends InputTextProps {
 	placeholder?: string;
 	initialData?: object;
 	col?: Cols;
+	notSet?: boolean;
 }
 
 export default function Input({
@@ -20,6 +21,7 @@ export default function Input({
 	label,
 	// initialData,
 	col = 2,
+	notSet = false,
 	...props
 }: IInputTextProps) {
 	const [inputValue, setInputValue] = useState("");
@@ -29,6 +31,7 @@ export default function Input({
 	const inputRef = useRef<HTMLInputElement>(null);
 
 	useEffect(() => {
+		if (notSet) return;
 		setFormFieldValue({
 			name: inputRef.current?.name,
 			value: inputValue

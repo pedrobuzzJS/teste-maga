@@ -6,32 +6,39 @@ import SesButton from "@/components/Inputs/Button/SesButton";
 import SInputMak from "@/components/Inputs/InputMaks/InputMask";
 import Input from "@/components/Inputs/InputText/Input";
 import { Modal } from "@/components/Modal/Modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "@/context/formContext";
 import DataGrid, { IColumnProps } from "@/components/DataGrid/DataGrid";
+import api from "@/services/api";
 
 export default function Pessoas() {
 	const [openModal, setOpenModal] = useState<boolean>(false);
 	const [columns] = useState<IColumnProps[]>([
 		{ isKey: true, field: "id", header: "ID", description: "id" },
-		{ field: "name", header: "Nome", description: "Nome" },
+		{ field: "nome", header: "Nome", description: "Nome" },
 		{ field: "cpf", header: "CPF", description: "CPF" }
 	]);
 	const [data, setData] = useState();
 
-	// const [contatCount, setContactCount] = useState<[]>([{}]);
+	const { clearFormValue, handleSubmit } = useForm();
 
-	const { clearFormValue, handleSubmit, formValues } = useForm();
-
-	const save = () => {
-		console.log("formValues", formValues);
+	const save = async (form: unknown) => {
+		await api.post("pessoa", form);
+		fetchData();
+		setOpenModal(false);
 	};
 
-	const reload = () => {
+	const fetchData = async () => {
 		setOpenModal(false);
 		clearFormValue();
+		const { data: fetchedData } = await api.get("/pessoa");
+		setData(fetchedData);
 		return console.log("Recarregar");
 	};
+
+	useEffect(() => {
+		fetchData();
+	}, []);
 
 	const HEADER = (
 		<Grid height={50}>
@@ -44,7 +51,7 @@ export default function Pessoas() {
 			<SesButton
 				icon="pi pi-check"
 				label="Confirmar"
-				onClick={save}
+				onClick={() => handleSubmit(save)}
 				style={{
 					height: "48px",
 					marginTop: "-10px"
@@ -60,9 +67,10 @@ export default function Pessoas() {
 					name={"searchPersons"}
 					label={"Perquisar Pessoas"}
 					col={11}
+					notSet
 				/>
 				<SesButton
-					onClick={reload}
+					onClick={fetchData}
 					disabled={false}
 					icon="pi pi-search"
 					className="p-button-success"
@@ -91,7 +99,10 @@ export default function Pessoas() {
 			</Grid>
 
 			<Modal
-				onHide={() => clearFormValue(setOpenModal(false))}
+				onHide={() => {
+					clearFormValue();
+					setOpenModal(false);
+				}}
 				visible={openModal}
 				header={HEADER}
 				footer={FOOTER}
