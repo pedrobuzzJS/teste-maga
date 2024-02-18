@@ -16,6 +16,7 @@ export interface sGridProps extends PropsWithChildren {
 	direction?: Direction;
 	alignItems?: AlignItens;
 	padding?: number;
+	gap?: number;
 }
 
 export default function Grid({

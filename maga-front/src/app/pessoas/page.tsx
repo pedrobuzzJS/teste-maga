@@ -2,19 +2,36 @@
 
 import Form from "@/components/Form/Form";
 import Grid from "@/components/GridSystem/GridStructure/Grid";
-import LineFluid from "@/components/GridSystem/LineFluid/LineFluid";
 import SesButton from "@/components/Inputs/Button/SesButton";
 import SInputMak from "@/components/Inputs/InputMaks/InputMask";
 import Input from "@/components/Inputs/InputText/Input";
 import { Modal } from "@/components/Modal/Modal";
 import { useState } from "react";
 import { useForm } from "@/context/formContext";
+import DataGrid, { IColumnProps } from "@/components/DataGrid/DataGrid";
 
 export default function Pessoas() {
 	const [openModal, setOpenModal] = useState<boolean>(false);
-	const [contatCount, setContactCount] = useState<[]>([1]);
+	const [columns] = useState<IColumnProps[]>([
+		{ isKey: true, field: "id", header: "ID", description: "id" },
+		{ field: "name", header: "Nome", description: "Nome" },
+		{ field: "cpf", header: "CPF", description: "CPF" }
+	]);
+	const [data, setData] = useState();
 
-	const { clearFormValue, handleSubmit } = useForm();
+	// const [contatCount, setContactCount] = useState<[]>([{}]);
+
+	const { clearFormValue, handleSubmit, formValues } = useForm();
+
+	const save = () => {
+		console.log("formValues", formValues);
+	};
+
+	const reload = () => {
+		setOpenModal(false);
+		clearFormValue();
+		return console.log("Recarregar");
+	};
 
 	const HEADER = (
 		<Grid height={50}>
@@ -27,7 +44,7 @@ export default function Pessoas() {
 			<SesButton
 				icon="pi pi-check"
 				label="Confirmar"
-				onClick={() => handleSubmit(console.log("teste de callback"))}
+				onClick={save}
 				style={{
 					height: "48px",
 					marginTop: "-10px"
@@ -38,23 +55,38 @@ export default function Pessoas() {
 
 	return (
 		<>
-			<Grid alignItems="center">
+			<Grid alignItems="start" justify="start">
 				<Input
 					name={"searchPersons"}
 					label={"Perquisar Pessoas"}
-					col={10}
+					col={11}
 				/>
 				<SesButton
-					label="Abrir Modal"
-					onClick={() => setOpenModal(true)}
+					onClick={reload}
 					disabled={false}
+					icon="pi pi-search"
 					className="p-button-success"
-					col={2}
+					col={1}
 					style={{
 						height: "48px",
-						marginTop: "-10px",
 						width: "100%"
 					}}
+				/>
+				<SesButton
+					label="Cadastrar"
+					onClick={() => setOpenModal(true)}
+					disabled={false}
+					icon="pi pi-search"
+					className="p-button-success"
+					style={{
+						padding: "10px"
+					}}
+				/>
+				<DataGrid
+					columns={columns}
+					initialData={data}
+					col={12}
+					loading={false}
 				/>
 			</Grid>
 

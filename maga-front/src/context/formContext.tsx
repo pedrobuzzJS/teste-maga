@@ -46,8 +46,9 @@ export const FormProvider: React.FC<FormWithChildren> = ({ children }) => {
 
 	const handleSubmit = async (callBack?: () => void) => {
 		const data = dot.object(form);
-		if (callBack) callBack();
+		setFormValues(data);
 		console.log(data);
+		// if (callBack) callBack();
 		return true;
 	};
 
