@@ -1,28 +1,19 @@
 <?php
 
 return [
-  'table_storage' => [
-    'table_name' => 'doctrine_migration_versions',
-    'version_column_name' => 'version',
-    'version_column_length' => 191,
-    'executed_at_column_name' => 'executed_at',
-    'execution_time_column_name' => 'execution_time',
-  ],
+    'table_storage' => [
+        'table_name' => 'migrations',
+        'version_column_name' => 'version',
+        'version_column_length' => 1024,
+        'executed_at_column_name' => 'executed_at',
+        'execution_time_column_name' => 'execution_time',
+    ],
 
-  'migrations_paths' => [
-    'MyProject\Migrations' => '/data/doctrine/migrations/lib/MyProject/Migrations',
-    'MyProject\Component\Migrations' => './Component/MyProject/Migrations',
-  ],
-  
-  'migrations' => [
-    'Migrations\CreatePessoaTable',
-    'Migrations\CreateContatoTable',
-  ],
+    'migrations_paths' => [
+        'Database\Migrations' => 'database/migrations'
+    ],
 
-  'all_or_nothing' => true,
-  'transactional' => true,
-  'check_database_platform' => true,
-  'organize_migrations' => 'none',
-  'connection' => null,
-  'em' => null,
+    'all_or_nothing' => true,
+    'check_database_platform' => true,
+    'organize_migrations' => 'none',
 ];

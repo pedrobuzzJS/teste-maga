@@ -3,16 +3,15 @@
 namespace Maga\Helper;
 
 use Doctrine\DBAL\DriverManager;
+use Doctrine\ORM\ORMSetup;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\ORMSetup;
-use Doctrine\Orm\Tools\Setup;
 
 class EntityManagerFactory {
   public static function createEntityManager()
   {
     $config = ORMSetup::createAttributeMetadataConfiguration(
-      paths: array(__DIR__ . "/src"),
+      paths: array(__DIR__ . "/.."),
       isDevMode: true,
     );
     
@@ -20,11 +19,14 @@ class EntityManagerFactory {
       'dbname' => 'magazord',
       'user' => 'postgres',
       'password' => 'postgres',
-      'host' => '0.0.0.0',
+      'host' => 'localhost',
       'port' => 5433,
       'driver' => 'pdo_pgsql',
     ];
 
-    return DriverManager::getConnection($connetion, $config);
+    $connection = DriverManager::getConnection($connetion, $config);
+
+    // return DriverManager::getConnection($connetion, $config);
+    return (new EntityManager($connection, $config));
   }
 }
