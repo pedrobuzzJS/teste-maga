@@ -25,13 +25,13 @@ class Pessoa
     #[Column(type: 'string', nullable: true)]
     public $cpf;
 
-    // #[OneToMany(targetEntity: Contato::class, mappedBy: 'pessoa')]
-    // private interable $contatos;
+    #[OneToMany(targetEntity: Contato::class, mappedBy: 'pessoa')]
+    public $contatos;
 
     public function __construct($pessoa) {
         $this->setNome($pessoa->nome);
         $this->setCpf($pessoa->cpf);
-        // $this->contatos = new ArrayCollection();
+        $this->contatos = new ArrayCollection();
     }
 
     public function addContato(Contato $contato)

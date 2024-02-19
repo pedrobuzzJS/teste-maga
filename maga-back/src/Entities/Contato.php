@@ -16,17 +16,22 @@ class Contato
     #[Id]
     #[Column(type: 'integer')]
     #[GeneratedValue]
-    private $id;
+    public $id;
 
     #[Column(type: 'boolean', nullable: true)]
-    private $tipo;
+    public $tipo;
 
     #[Column(type: 'string', nullable: true)]
-    private $descricao;
+    public $descricao;
 
     #[ManyToOne(targetEntity: Pessoa::class, inversedBy: 'contatos')]
-    public Pessoa $pessoa;
+    public $pessoa;
 
+    public function __construct($contato) {
+        $this->setTipo($contato->tipo);
+        $this->setDescricao($contato->descricao);
+        // $this->setPessoa($contato->pessoa);
+    }
     public function setId(int $id)
     {
         $this->id = $id;
@@ -57,7 +62,7 @@ class Contato
         return $this->descricao;
     }
 
-    public function setPessoa(Pessoa $pessoa)
+    public function setPessoa($pessoa)
     {
         $this->pessoa = $pessoa;
     }

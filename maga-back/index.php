@@ -6,6 +6,7 @@ use Slim\Exception\HttpNotFoundException;
 use Slim\Factory\AppFactory;
 
 use Maga\Controllers\PessoaController;
+use Maga\Controllers\ContatoController;
 
 require_once 'vendor/autoload.php';
 
@@ -35,6 +36,12 @@ $app->get('/pessoa/{id}', PessoaController::class.':list');
 $app->post('/pessoa', PessoaController::class.':insert');
 $app->put('/pessoa', PessoaController::class.':update');
 $app->delete('/pessoa/{id}', PessoaController::class.':delete');
+
+$app->get('/contato', ContatoController::class.':list');
+$app->get('/contato/{id}', ContatoController::class.':list');
+$app->post('/contato', ContatoController::class.':insert');
+$app->put('/contato', ContatoController::class.':update');
+$app->delete('/contato/{id}', ContatoController::class.':delete');
 
 $app->map(['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], '/{routes:.+}', function ($request, $response) {
     throw new HttpNotFoundException($request);

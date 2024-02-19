@@ -3,18 +3,18 @@
 namespace Maga\Repositories;
 
 use Maga\Helper\EntityManagerFactory;
-use Maga\Entities\Pessoa;
+use Maga\Entities\Contato;
 
-class PessoaRepository
+class ContatoRepository
 {
   public function create($data)
   {
     $entityManager = EntityManagerFactory::createEntityManager();
-    $pessoa = new Pessoa($data);
-    $entityManager->persist($pessoa);
+    $contato = new Contato($data);
+    $entityManager->persist($contato);
     $entityManager->flush();
 
-    return $pessoa;
+    return $contato;
   }
 
   public function list($params = null)
@@ -22,27 +22,28 @@ class PessoaRepository
     $entityManager = EntityManagerFactory::createEntityManager();
 
     if ($params)
-      return $entityManager->getRepository(Pessoa::class)->find($params);
+      return $entityManager->getRepository(Contato::class)->find($params);
 
-    return $entityManager->getRepository(Pessoa::class)->findAll();
+    return $entityManager->getRepository(Contato::class)->findAll();
   }
 
   public function update($data)
   {
     $entityManager = EntityManagerFactory::createEntityManager();
 
-    $pessoa = $entityManager->getRepository(Pessoa::class)->find($data->id);
-    $pessoa->setNome($data->nome);
-    $pessoa->setCpf($data->cpf);
+    $contato = $entityManager->getRepository(Contato::class)->find($data->id);
+    $contato->setTipo($data->tipo);
+    $contato->setDescricao($data->descricao);
+    $contato->setPessoa($data->pessoa);
 
-    $entityManager->persist($pessoa);
+    $entityManager->persist($contato);
     $entityManager->flush();
   }
 
   public function delete($id)
   {
     $entityManager = EntityManagerFactory::createEntityManager();
-    $pessoa = $entityManager->getRepository(Pessoa::class)->find($id);
+    $pessoa = $entityManager->getRepository(Contato::class)->find($id);
 
     if ($pessoa) {
       $entityManager->remove($pessoa);
