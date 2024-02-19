@@ -19,11 +19,7 @@ $app->options('/{routes:.+}', function ($request, $response, $args) {
 $app->add(function ($request, $handler) {
     $response = $handler->handle($request);
     
-    // echo '<pre>';
-    // var_dump($request->getHeaders());
-    // echo '</pre>';
     return $response
-            // ->withHeader('Access-Control-Allow-Origin', '*')
             ->withHeader('Access-Control-Allow-Origin', '*')
             ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
             ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
@@ -34,16 +30,11 @@ $app->get('/', function (Request $request, Response $response, array $args) {
     return $response;
 });
 
-// $app->get('/{name}', function (Request $request, Response $response, array $args) {
-//     $name = $args['name'];
-//     $response->getBody()->write("Hello, $name");
-//     return $response;
-// });
-
 $app->get('/pessoa', PessoaController::class.':list');
+$app->get('/pessoa/{id}', PessoaController::class.':list');
 $app->post('/pessoa', PessoaController::class.':insert');
-$app->put('/pessoa[/{id}]', PessoaController::class.':update');
-$app->delete('/pessoa[/{id}]', PessoaController::class.':delete');
+$app->put('/pessoa', PessoaController::class.':update');
+$app->delete('/pessoa/{id}', PessoaController::class.':delete');
 
 $app->map(['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], '/{routes:.+}', function ($request, $response) {
     throw new HttpNotFoundException($request);

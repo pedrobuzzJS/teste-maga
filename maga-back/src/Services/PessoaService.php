@@ -14,19 +14,32 @@ class PessoaService
   public function __construct(PessoaRepository $pessoaRepository) {
     $this->pessoaRepository = $pessoaRepository;
   }
-  // public function list(Request $request, Response $response, array $args): Response
-  // {
-  //   $entityManager = EntityManagerFactory::createEntityManager();
-  //   $pessoa = $entityManager->getRepository(Pessoa::class)->findAll();
+  public function list($params = null)
+  {
+    // var_dump($params);
+    $pessoa = $this->pessoaRepository->list($params);
 
-  //   // AppHelper::dd($pessoa);
-  //   return AppHelper::sendResponseJson($response, $pessoa);
-  // }
+    return $pessoa;
+  }
  
   public function insert($data)
   {
     $pessoaCriada = $this->pessoaRepository->create($data);
 
     return $pessoaCriada;
+  }
+
+  public function update($data)
+  {
+    $pessoaAlterada = $this->pessoaRepository->update($data);
+
+    return $pessoaAlterada;
+  }
+
+  public function delete($id)
+  {
+    $pessoaDeletada = $this->pessoaRepository->delete($id);
+
+    return $$pessoaDeletada;
   }
 }

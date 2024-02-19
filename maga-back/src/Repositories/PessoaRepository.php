@@ -22,16 +22,34 @@ class PessoaRepository
 
   public function list($paramns = null)
   {
+    $entityManager = EntityManagerFactory::createEntityManager();
 
+    if ($paramns)
+      return $entityManager->getRepository(Pessoa::class)->find($paramns);
+
+    return $entityManager->getRepository(Pessoa::class)->findAll();
   }
 
   public function update($data)
   {
+    $entityManager = EntityManagerFactory::createEntityManager();
 
+    $pessoa = $entityManager->getRepository(Pessoa::class)->find($data->id);
+    $pessoa->setNome($data->nome);
+    $pessoa->setCpf($data->cpf);
+
+    $entityManager->persist($pessoa);
+    $entityManager->flush();
   }
 
   public function delete($id)
   {
+    $entityManager = EntityManagerFactory::createEntityManager();
+    $pessoa = $entityManager->getRepository(Pessoa::class)->find($id);
 
+    if ($pessoa) {
+      $entityManager->remove($pessoa);
+      $entityManager->flush();
+    }
   }
 }
