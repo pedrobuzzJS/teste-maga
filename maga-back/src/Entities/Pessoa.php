@@ -28,6 +28,9 @@ class Pessoa
     #[OneToMany(targetEntity: Contato::class, mappedBy: 'pessoa')]
     public $contatos;
 
+    #[Column(type: 'integer', nullable: true)]
+    public $pessoa_id;
+
     public function __construct($pessoa) {
         $this->setNome($pessoa->nome);
         $this->setCpf($pessoa->cpf);

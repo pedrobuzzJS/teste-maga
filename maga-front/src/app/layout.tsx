@@ -13,7 +13,7 @@ import { FormProvider } from "@/context/formContext";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-	title: "Softses",
+	title: "Teste Magazord",
 	description: "Feito por Pedro Artur Buzzi Pereira"
 };
 

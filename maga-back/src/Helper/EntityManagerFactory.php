@@ -16,7 +16,7 @@ class EntityManagerFactory {
     );
     
     $connetion = [
-      'dbname' => 'magazord',
+      'dbname' => 'maga',
       'user' => 'postgres',
       'password' => 'postgres',
       'host' => 'localhost',
@@ -26,7 +26,6 @@ class EntityManagerFactory {
 
     $connection = DriverManager::getConnection($connetion, $config);
 
-    // return DriverManager::getConnection($connetion, $config);
     return (new EntityManager($connection, $config));
   }
 }
