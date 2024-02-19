@@ -10,7 +10,6 @@ import { useEffect, useState } from "react";
 import { useForm } from "@/context/formContext";
 import DataGrid, { IColumnProps } from "@/components/DataGrid/DataGrid";
 import api from "@/services/api";
-import { Button } from "primereact/button";
 
 export default function Pessoas() {
 	const [openModal, setOpenModal] = useState<boolean>(false);
@@ -71,14 +70,23 @@ export default function Pessoas() {
 		if (formUpdate.id) {
 			await api.put(`pessoa`, form);
 			fetchData();
+			clearFormValue();
 			setOpenModal(false);
 			return;
 		}
 
 		await api.post("pessoa", form);
 		fetchData();
+		clearFormValue();
 		setOpenModal(false);
 	};
+
+	function create() {
+		clearFormValue();
+		setFormUpdate({});
+		setDisabled(false);
+		setOpenModal(true);
+	}
 
 	function see(id: number) {
 		setDisabled(true);
@@ -115,7 +123,7 @@ export default function Pessoas() {
 
 	const HEADER = (
 		<Grid height={50}>
-			<span>Ola</span>
+			<span>Cadastro de Pessoas</span>
 		</Grid>
 	);
 
@@ -156,7 +164,7 @@ export default function Pessoas() {
 				/>
 				<SesButton
 					label="Cadastrar"
-					onClick={() => setOpenModal(true)}
+					onClick={create}
 					disabled={false}
 					icon="pi pi-search"
 					className="p-button-success"

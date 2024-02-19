@@ -16,7 +16,12 @@ export default function ActiveLink({
 	const isActive = pathName === href.toString();
 	return (
 		<div>
-			<Link href={href} {...props} className={isActive ? "" : ""}>
+			<Link
+				href={href}
+				{...props}
+				className={isActive ? "" : ""}
+				style={{ color: "yellow" }}
+			>
 				{children}
 			</Link>
 		</div>

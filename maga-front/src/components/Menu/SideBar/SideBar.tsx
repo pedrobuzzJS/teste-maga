@@ -82,23 +82,31 @@ export default function SideBar({ children }: SideBarProps) {
 					}`}
 					onMouseOver={() => handleSideBar(true)}
 					onMouseLeave={() => handleSideBar(false)}
+				></div>
+				<div
+					style={{
+						position: "absolute",
+						zIndex: 100,
+						left: 0,
+						top: "50px"
+					}}
 				>
-					{/* <ActiveLink
-						href={"/"}
+					<ActiveLink
+						href={"/pessoas"}
 						children={
 							<>
-								<h1>Home</h1>
+								<h1>Pessoas</h1>
 							</>
 						}
 					/>
 					<ActiveLink
-						href={"/teste"}
+						href={"/contatos"}
 						children={
 							<>
-								<h1>Teste</h1>
+								<h1>Contatos</h1>
 							</>
 						}
-					/> */}
+					/>
 				</div>
 			</aside>
 			<ContentPage
