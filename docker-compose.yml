@@ -3,7 +3,11 @@ services:
   postgres:
     image: "postgres:latest"
     environment:
+      - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=magazord
+    ports:
+      - "5432:5432"
   api:
     build:
       dockerfile: Dockerfile
@@ -17,9 +21,9 @@ services:
     environment:
       - PGUSER=postgres
       - PGHOST=localhost
-      - PGDATABASE=maga
+      - PGDATABASE=magazord
       - PGPASSWORD=postgres
-      - PGPORT=5455
+      - PGPORT=5432
   client:
     stdin_open: true
     depends_on:

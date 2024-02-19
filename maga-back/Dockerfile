@@ -28,5 +28,6 @@ RUN composer dump-autoload --optimize
 # Comando padrão a ser executado ao iniciar o container
 EXPOSE 8000
 
-# CMD ["php", "bin/doctrine.php", "orm:schema-tool:create"]
-CMD ["php", "bin/doctrine.php", "orm:schema-tool:create", "php", "-S", "0.0.0.0:8000", "index.php"]
+RUN php bin/doctrine.php orm:schema-tool:create
+
+CMD ["php", "-S", "localhost:8000", "index.php"]
