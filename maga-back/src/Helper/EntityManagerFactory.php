@@ -20,7 +20,7 @@ class EntityManagerFactory {
       'user' => 'postgres',
       'password' => 'postgres',
       'host' => 'localhost',
-      'port' => 5433,
+      'port' => 5455,
       'driver' => 'pdo_pgsql',
     ];
 

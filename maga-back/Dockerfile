@@ -20,11 +20,13 @@ COPY composer.json composer.lock /app/
 RUN composer install --no-scripts --no-autoloader
 
 # Copie o restante dos arquivos do projeto
-COPY . /app
+COPY . .
 
 # Gere o autoload do Composer
 RUN composer dump-autoload --optimize
 
 # Comando padrão a ser executado ao iniciar o container
 EXPOSE 8000
-CMD ["php", "-S", "0.0.0.0:8000", "index.php"]
+
+# CMD ["php", "bin/doctrine.php", "orm:schema-tool:create"]
+CMD ["php", "bin/doctrine.php", "orm:schema-tool:create", "php", "-S", "0.0.0.0:8000", "index.php"]

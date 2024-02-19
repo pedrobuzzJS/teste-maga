@@ -28,5 +28,7 @@ services:
     build:
       dockerfile: Dockerfile
       context: ./maga-front
+    ports:
+      - "3000:3000"
     volumes:
       - /maga-front/node_modules
