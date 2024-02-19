@@ -7,7 +7,7 @@ O sistema permite o cadastro de pessoas e contatos, sendo que cada pessoa pode t
 - Next.JS v14
 - Postgres
 - Doctrine
-- Slima Framework
+- Slim Framework
 - Docker
 
 ## Como rodas o projeto
