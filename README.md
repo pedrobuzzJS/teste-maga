@@ -24,7 +24,9 @@ Estando no diretório maga-back, e certificando-se que a base está criada, exec
 ```
 composer install
 ```
+```
 php bin/doctrine.php orm:schema-tool:create
+```
 
 O PostgresSQL será exposto na porta `5432` e a aplicação será exposta na porta `3000`.
 
