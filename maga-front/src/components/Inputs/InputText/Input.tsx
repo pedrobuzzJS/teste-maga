@@ -11,7 +11,7 @@ interface IInputTextProps extends InputTextProps {
 	id?: string;
 	label: string;
 	placeholder?: string;
-	initialData?: object;
+	initialData?: any;
 	col?: Cols;
 	notSet?: boolean;
 }
@@ -19,12 +19,12 @@ interface IInputTextProps extends InputTextProps {
 export default function Input({
 	name,
 	label,
-	// initialData,
+	initialData,
 	col = 2,
 	notSet = false,
 	...props
 }: IInputTextProps) {
-	const [inputValue, setInputValue] = useState("");
+	const [inputValue, setInputValue] = useState(initialData);
 
 	const { setFormFieldValue } = useForm();
 

@@ -16,6 +16,7 @@ interface IInputMaks extends InputMaskProps {
 	placeholder: string;
 	label: string;
 	mask: string;
+	initialData?: any;
 }
 
 export default function SInputMak({
@@ -23,10 +24,11 @@ export default function SInputMak({
 	mask,
 	label,
 	col = 2,
+	initialData,
 	...props
 }: IInputMaks) {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const [inputValue, setInputValue] = useState<any>("");
+	const [inputValue, setInputValue] = useState<any>(initialData);
 
 	const { setFormFieldValue } = useForm();
 

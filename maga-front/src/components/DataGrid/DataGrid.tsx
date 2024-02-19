@@ -39,12 +39,13 @@ export default function DataGrid({
 				removableSort={true}
 				{...props}
 			>
-				{columns.map((col, i) => (
+				{columns.map((collumn, i) => (
 					<Column
 						key={i}
-						field={col.field}
-						header={col.header}
-						{...col}
+						field={collumn.field}
+						header={collumn.header}
+						body={collumn.body}
+						{...collumn}
 					/>
 				))}
 			</DataTable>
