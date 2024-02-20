@@ -10,9 +10,6 @@ use Maga\Controllers\ContatoController;
 
 require_once 'vendor/autoload.php';
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->load();
-
 $app = AppFactory::create();
 
 $app->options('/{routes:.+}', function ($request, $response, $args) {
