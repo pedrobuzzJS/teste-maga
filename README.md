@@ -34,7 +34,7 @@ npm install
 npm run dev
 ```
 
-O PostgresSQL será exposto na porta `5432` e a aplicação será exposta na porta `3000`.
+Deverá ser criada uma base no banco de dados PostgresSQL com o nome `magazord`, ele deverá ser exposto na porta `5432` e a aplicação front-end será exposta na porta `3000`.
 
 Portanto, para acessar o front-end da aplicação, basta acessar o endereço
 `http://localhost:3000`
