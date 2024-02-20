@@ -8,9 +8,8 @@ O sistema permite o cadastro de pessoas e contatos, sendo que cada pessoa pode t
 - Postgres
 - Doctrine
 - Slim Framework
-- Docker
 
-## Como rodas o projeto
+## Como rodar o projeto
 
 Será necessário criar uma base de dados com o nome `magazord`
 
