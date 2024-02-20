@@ -14,18 +14,25 @@ O sistema permite o cadastro de pessoas e contatos, sendo que cada pessoa pode t
 
 Será necessário criar uma base de dados com o nome `magazord`
 
-Para rodar o projeto, é necessário executar o comando abaixo, que irá instalar todas as dependências do sistema.
-```
-docker-compose up
-```
+Para rodar o projeto, é necessário instalar as dependências e executar o servidor.
 
-Para caso der erro, será necessário executar a api manualmente.
-Estando no diretório maga-back, e certificando-se que a base está criada, executar os seuingtes comandos.
+No diretório `/maga-back`, executar os segunites comandos no terminal,
 ```
 composer install
 ```
 ```
 php bin/doctrine.php orm:schema-tool:create
+```
+```
+php -S localhost:8000 index.php
+```
+
+No diretório `/maga-front`, executar os segunites comandos no terminal,
+```
+npm install
+```
+```
+npm run dev
 ```
 
 O PostgresSQL será exposto na porta `5432` e a aplicação será exposta na porta `3000`.

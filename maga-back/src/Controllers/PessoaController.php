@@ -16,14 +16,24 @@ class PessoaController
   {
     $pessoaRepository = new PessoaRepository();
     $pessoaService = new PessoaService($pessoaRepository);
-
-    $filter = $data = AppHelper::getDataFromRequest($request);
+    $nome = AppHelper::getDataFromRequest($request);
 
     $data = $pessoaService->list($args);
 
     return AppHelper::sendResponseJson($response, $data);
   }
 
+  public function findByName(Request $request, Response $response, array $args): Response
+  {
+    $pessoaRepository = new PessoaRepository();
+    $pessoaService = new PessoaService($pessoaRepository);
+    $nome = AppHelper::getDataFromRequest($request);
+
+    var_dump($nome->nome);
+    $data = $pessoaService->findByName($nome->nome);
+
+    return AppHelper::sendResponseJson($response, $data);
+  }
  
   public function insert(Request $request, Response $response, array $args): Response
   {

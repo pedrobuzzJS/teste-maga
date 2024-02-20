@@ -28,6 +28,8 @@ RUN composer dump-autoload --optimize
 # Comando padrão a ser executado ao iniciar o container
 EXPOSE 8000
 
+COPY ./create_database.sql /docker-entrypoint-initdb.d/
+
 RUN php bin/doctrine.php orm:schema-tool:create
 
 CMD ["php", "-S", "localhost:8000", "index.php"]

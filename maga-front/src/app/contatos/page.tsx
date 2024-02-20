@@ -96,7 +96,7 @@ export default function Contatos() {
 	async function getPessoas() {
 		const { data: fetchedData } = await api.get("/pessoa");
 		setPessoasOptions(
-			fetchedData.map((item) => ({ label: item.nome, value: item.id }))
+			fetchedData?.map((item) => ({ label: item.nome, value: item.id }))
 		);
 	}
 

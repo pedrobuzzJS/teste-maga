@@ -11,9 +11,12 @@ class PessoaService
   }
   public function list($params = null)
   {
-    $pessoa = $this->pessoaRepository->list($params);
+    return $this->pessoaRepository->list($params);
+  }
 
-    return $pessoa;
+  public function findByName($nome)
+  {
+    return $this->pessoaRepository->findByName($nome);
   }
  
   public function insert($data)

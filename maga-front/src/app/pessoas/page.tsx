@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "@/context/formContext";
 import DataGrid, { IColumnProps } from "@/components/DataGrid/DataGrid";
 import api from "@/services/api";
+import { delayAndRun } from "@/helpers/functions";
 
 export default function Pessoas() {
 	const [openModal, setOpenModal] = useState<boolean>(false);
@@ -61,6 +62,7 @@ export default function Pessoas() {
 		}
 	]);
 	const [data, setData] = useState();
+	const [search, setSearch] = useState();
 
 	const { clearFormValue, handleSubmit } = useForm();
 
@@ -112,6 +114,18 @@ export default function Pessoas() {
 		setData(fetchedData);
 	};
 
+	const searchByName = async () => {
+		if (search.target.value) {
+			const { data: fetchedData } = await api.post(`/findPessoa`, {
+				nome: search.target.value
+			});
+			setData(fetchedData);
+			setSearch(null);
+			return;
+		}
+		// return fetchData();
+	};
+
 	async function remove(id: number) {
 		await api.delete(`pessoa/${id}`);
 		fetchData();
@@ -150,9 +164,10 @@ export default function Pessoas() {
 					label={"Perquisar Pessoas"}
 					col={11}
 					notSet
+					onChange={setSearch}
 				/>
 				<SesButton
-					onClick={fetchData}
+					onClick={searchByName}
 					disabled={false}
 					icon="pi pi-search"
 					className="p-button-success"

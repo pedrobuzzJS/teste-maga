@@ -39,7 +39,7 @@ export default function DataGrid({
 				removableSort={true}
 				{...props}
 			>
-				{columns.map((collumn, i) => (
+				{columns?.map((collumn, i) => (
 					<Column
 						key={i}
 						field={collumn.field}

@@ -27,6 +27,13 @@ class PessoaRepository
     return $entityManager->getRepository(Pessoa::class)->findAll();
   }
 
+  public function findByName($nome)
+  {
+    $entityManager = EntityManagerFactory::createEntityManager();
+
+    return $entityManager->getRepository(Pessoa::class)->findBy(['nome' => $nome]);
+  }
+
   public function update($data)
   {
     $entityManager = EntityManagerFactory::createEntityManager();

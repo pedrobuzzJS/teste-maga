@@ -35,6 +35,7 @@ $app->get('/', function (Request $request, Response $response, array $args) {
 });
 
 $app->get('/pessoa', PessoaController::class.':list');
+$app->post('/findPessoa', PessoaController::class.':findByName');
 $app->get('/pessoa/{id}', PessoaController::class.':list');
 $app->post('/pessoa', PessoaController::class.':insert');
 $app->put('/pessoa', PessoaController::class.':update');
